@@ -1,0 +1,102 @@
+@import './variables';
+
+.detail-page {
+  .content-inner {
+    padding: 0 16px;
+  }
+  .user-panel {
+    justify-content: space-between;
+    .user-avatar {
+      img {
+        width: 40px;
+        height: 40px;
+      }
+    }
+    .user-name {
+      font-weight: bold;
+    }
+  }
+  .preview-wrapper {
+    position: relative;
+    .datetime {
+      position: absolute;
+      bottom: 16px;
+      color: #fff;
+      font-weight: bold;
+      padding: 0 16px;
+      z-index: 10;
+    }
+  }
+  .description {
+    margin-bottom: 15px;
+    p {
+      font-size: 15px;
+    }
+  }
+  .participants {
+    background-color: #f3f3f3;
+    padding: 20px 15px;
+    border-radius: 10px;
+    margin: 15px 0;
+    .scroll-content {
+      white-space: nowrap;
+      height: 110px;
+      overflow: hidden;
+      position: relative;
+    }
+    .scroll-inner {
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      position: absolute;
+      overflow-y: hidden;
+      overflow-x: hidden;
+      will-change: scroll-position;
+      &.scroll-x {
+        overflow-x: auto;
+      }
+    }
+    .scroll-item {
+      display: inline-block;
+      width: 80px;
+      max-width: 80px;
+      text-align: center;
+      color: #3c4f5e;
+    }
+    .likes {
+      font-size: 14px;
+      .mat-icon {
+        font-size: 14px;
+        width: 15px;
+        height: 15px;
+      }
+    }
+    .user-avatar img {
+      width: 50px;
+      height: 50px;
+    }
+    .user-name {
+      margin: 5px;
+    }
+  }
+  .winner {
+    text-align: center;
+    background-color: $main-color;
+    color: $white-color;
+    border-radius: 10px;
+    padding: 15px 20px !important;
+    .user-avatar {
+      width: 65px;
+      height: 65px;
+      margin: 10px auto 0;
+      border: 3px solid $white-color;
+      background-position: center;
+      border-radius: 50%;
+      background-size: 100%;
+    }
+  }
+  .subtitle, h3 {
+    margin: 0;
+  }
+}

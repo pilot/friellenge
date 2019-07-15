@@ -1,0 +1,77 @@
+<div class="spinner-container" *ngIf="dataSource.loader">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="page-content page-donations">
+  <div class="header-page">
+    <h1 class="title">Friellenges Donate</h1>
+    <div class="statistic">
+      <p class="subtitle">Friellenges Donate: <span>{{statistic?.total_for_challenges | currency}};</span></p>
+      <p class="subtitle">Users Donate: <span>{{statistic?.total_for_users | currency}};</span></p>
+      <p class="subtitle total-sum">Total: <span>{{statistic?.total | currency}};</span></p>
+    </div>
+  </div>
+
+  <mat-table [dataSource]="dataSource" matSort class="challenges-table">
+
+    <!-- Index Column -->
+    <ng-container matColumnDef="index">
+      <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+      <mat-cell *matCellDef="let row; let i = index;">
+        {{i+1}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Title Column -->
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <div class="flex-row title">
+          <ng-container *ngIf="row.preview?.type == 'single'; else multiple">
+            <div class="preview" [ngStyle]="{'background-image': 'url('+row.preview['previewUrl']+')'}">
+              <img [src]="row.preview['previewUrl']">
+            </div>
+          </ng-container>
+
+          <ng-template #multiple>
+            <div class="preview" [ngStyle]="{'background-image': 'url('+row.preview['previewUrl'][0]+')'}">
+              <img [src]="row.preview['previewUrl'][0]">
+            </div>
+          </ng-template>
+          <p class="sub-title">{{row.description | truncate: 3}}</p>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+
+    <!-- Type Category -->
+    <ng-container matColumnDef="category">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Сategory</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.category.name}}</mat-cell>
+    </ng-container>
+
+    <!-- Participant count Column -->
+    <ng-container matColumnDef="participant_count">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Количество участников</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{row.participant_count}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Donate Column -->
+    <ng-container matColumnDef="donate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Donate</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.donation | currency}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="goToDetail(row.uuid)">
+    </mat-row>
+  </mat-table>
+
+
+  <mat-paginator [length]="dataSource.pagination.count"
+                 [pageSize]="dataSource.pagination.pageSize">
+  </mat-paginator>
+</div>
+

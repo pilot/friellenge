@@ -1,0 +1,89 @@
+<div class="spinner-container" *ngIf="dataSource.loading$ | async">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="page-content">
+  <div class="header-page">
+    <h1 class="title">Жалобы на Пользователей</h1>
+  </div>
+
+  <div class="header-table">
+    <mat-checkbox (change)="applyFilter()">Просмотренные</mat-checkbox>
+  </div>
+
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <!-- Index Column -->
+    <ng-container matColumnDef="index">
+      <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+      <mat-cell *matCellDef="let row; let i = index;">
+        {{i+1}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Author Column -->
+    <ng-container matColumnDef="author">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Author</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <div class="flex-row user">
+          <div class="user-photo" [ngStyle]="{'background-image': 'url('+row.author.photo+')'}">
+          </div>
+          <p class="sub-title">
+            {{row.author.first_name}}
+            {{row.author.last_name}}
+          </p>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Challenges Column -->
+    <ng-container matColumnDef="user">
+      <mat-header-cell *matHeaderCellDef>Пользователь</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <div class="flex-row user">
+          <div class="user-photo" [ngStyle]="{'background-image': 'url('+row.reported_object.photo+')'}">
+          </div>
+          <p>
+            {{row.reported_object.first_name}}
+            {{row.reported_object.last_name}}
+          </p>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Reason Column -->
+    <ng-container matColumnDef="reason">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Причина</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.reason }}</mat-cell>
+    </ng-container>
+
+    <!-- Reviewed Column -->
+    <ng-container matColumnDef="reviewed">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Reviewed</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.is_reviewed}}</mat-cell>
+    </ng-container>
+
+    <!-- Menu actions Column -->
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-icon-button color="primary" (click)="reviewedComplaint($event,row)">
+          <mat-icon>done</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteComplaint($event, row.uuid)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="viewDetail(row)">
+    </mat-row>
+  </mat-table>
+
+
+  <mat-paginator [length]="dataSource.pagination.count"
+                 [pageSize]="dataSource.pagination.pageSize">
+  </mat-paginator>
+
+</div>

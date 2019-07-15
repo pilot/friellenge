@@ -1,0 +1,16 @@
+<mat-toolbar class="admin-toolbar">
+  <button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <app-navbar></app-navbar>
+</mat-toolbar>
+<mat-sidenav-container class="admin-panel">
+  <mat-sidenav #sidenav mode="side" opened="true" class="sidenav">
+    <app-admin-menu></app-admin-menu>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

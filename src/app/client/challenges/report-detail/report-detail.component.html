@@ -1,0 +1,36 @@
+<app-header></app-header>
+
+<section class="main-content detail-page">
+  <ng-container *ngIf="report">
+
+    <div class="preview-wrapper">
+      <!--Media Preview-->
+      <app-media-preview [data]="report.preview"></app-media-preview>
+
+      <ng-container *ngIf="!report.preview?.video">
+        <!--DateTime-->
+        <p class="datetime">{{report.created | dateTime}}</p>
+      </ng-container>
+    </div>
+
+
+    <div class="content-inner">
+      <!-- Start .user-panel -->
+      <div class="flex-row-center user-panel">
+        <h3 class="user-name">{{report.author.fullName}}</h3>
+        <div class="user-avatar">
+          <img [src]="report.author.photo">
+        </div>
+      </div>
+      <!-- End .user-panel -->
+
+      <div class="description">
+        <p>{{report.description}}</p>
+      </div>
+
+      <!--Section social actions-->
+      <app-social-activity [data]="report.activities()"></app-social-activity>
+    </div>
+  </ng-container>
+</section>
+

@@ -1,0 +1,44 @@
+.item-category {
+  position: relative;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  &.edit {
+    border-bottom: 2px solid #3f51b5;
+  }
+  .item {
+    padding-right: 55px;
+    min-height: 25px;
+    .mat-form-field-infix {
+      border-top: 0;
+      padding-top: 0;
+    }
+    .mat-form-field-underline {
+      bottom: 0;
+    }
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+    .mat-form-field-underline {
+      display: none;
+    }
+  }
+  &:hover {
+    .actions-icons {
+      opacity: 1;
+    }
+  }
+  .actions-icons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    //opacity: 0;
+    .mat-icon-button {
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+      .mat-icon {
+        font-size: 20px;
+      }
+    }
+  }
+}

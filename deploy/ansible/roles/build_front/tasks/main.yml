@@ -1,0 +1,15 @@
+---
+
+  - git:
+      repo: "{{git_url}}"
+      dest: "{{ project_front_dir }}"
+      version: "{{ git_branch }}"
+      accept_hostkey: yes
+      key_file: "~/.ssh/friellenge_rsa"
+      force: yes
+
+  - name: npm install
+    shell: "cd {{ project_front_dir }} && npm install"
+
+  - name: npm build
+    shell: "cd {{ project_front_dir }} && npm run build:{{ server_type }}"

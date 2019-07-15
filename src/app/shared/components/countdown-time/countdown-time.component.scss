@@ -1,0 +1,19 @@
+.countDown {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 10px;
+  padding: 30px 20px;
+  text-align: center;
+  &.begin {
+    background-color: #22b355;
+  }
+  &.end {
+    background-color: #fc1e2e;
+  }
+  p {
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+}
+

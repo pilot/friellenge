@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Friellenge</title>
+  <style>
+    html, body {
+      font-family: -apple-system, "Helvetica Neue", "Roboto", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .main-content {
+      margin: 0 auto;
+      max-width: 640px;
+      padding: 0 16px;
+    }
+
+    .main-content .inner {
+      margin-top: 70px;
+    }
+
+    .logo {
+      width: 60px;
+      margin: 0 auto;
+    }
+
+    .logo img {
+      width: 100%;
+      height: auto;
+    }
+
+    .app h1 {
+      color: #fc1e2e;
+      font-size: 1.8rem;
+      margin: 10px 0;
+      font-weight: normal;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .open-app {
+      display: block;
+      border-radius: 20px;
+      color: #fff;
+      text-decoration: none;
+      background-color: #22b355;
+      font-size: 18px;
+      text-align: center;
+      padding: 10px 12px;
+    }
+
+  </style>
+</head>
+<body>
+<div class="main-content">
+  <div class="inner">
+    <div class="app">
+      <div class="logo">
+        <img id='logo' src="https://dev.friellenge.com/assets/img/app-logo.png">
+      </div>
+      <h1 class="text-center">Friellenge</h1>
+    </div>
+
+    <h3 class="text-center">To finish <span id="action-type"></span> you need</h3>
+
+    <a class="open-app" id="redBtn" href="">Open app</a>
+  </div>
+</div>
+</body>
+<script type="text/javascript">
+  function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+  }
+
+  function getMobileOperatingSystem() {
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    // Windows Phone must come first because its UA also contains "Android"
+    if (/windows phone/i.test(userAgent)) {
+      return "Windows Phone";
+    }
+
+    if (/android/i.test(userAgent)) {
+      return "Android";
+    }
+
+    // iOS detection from: http://stackoverflow.com/a/9039885/177710
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      return "iOS";
+    }
+    return "unknown";
+  }
+
+  function ready() {
+    let url = window.location.href;
+    let key = getParameterByName('key', url);
+    let urlParts = url.split('/');
+    let type = urlParts[2];
+    console.log('url', url);
+    console.log('key', key);
+    console.log('type', type);
+
+    document.getElementById('redBtn').onclick = function (e) {
+      e.preventDefault();
+      let device = getMobileOperatingSystem();
+      if (device == 'Android') {
+        location.href = 'http://friellenge.com/' + type + '/' + key;
+      } else if (device == 'iOS') {
+        location.href = 'friellenge://' + type + '/' + key;
+      }
+    };
+  }
+
+  document.addEventListener("DOMContentLoaded", ready);
+</script>
+</html>

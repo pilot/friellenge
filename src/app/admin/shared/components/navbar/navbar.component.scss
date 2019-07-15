@@ -1,0 +1,20 @@
+:host {
+  width: 100%;
+}
+
+.main-navbar {
+  justify-content: space-between;
+  align-items: center;
+  .user-profile {
+    img {
+      width: 35px;
+      height: 35px;
+    }
+  }
+  .navbar-right {
+    align-items: center;
+  }
+  .mat-button.user-profile {
+    padding-right: 0;
+  }
+}

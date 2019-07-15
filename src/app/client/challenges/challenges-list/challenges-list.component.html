@@ -1,0 +1,16 @@
+<app-header></app-header>
+
+<section class="main-content">
+  <ng-container *ngIf="challengesList.length > 0">
+    <div class="wrapper-cards" infiniteScroll
+         [infiniteScrollDistance]="2"
+         [infiniteScrollThrottle]="50"
+         (scrolled)="onScroll()">
+      <app-card *ngFor="let card of challengesList" [card]="card"></app-card>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!loadData && challengesList.length == 0;">
+    <h4 class="text-center">There are no Friellenges yet.</h4>
+  </ng-container>
+</section>

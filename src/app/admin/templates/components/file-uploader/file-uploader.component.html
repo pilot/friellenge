@@ -1,0 +1,17 @@
+<div class="file-wrapper">
+  <div *ngIf="!file; else previewFile">
+    <input class="file-input" type="file" (change)="onFileChange(fileInput)" #fileInput>
+    <button mat-raised-button color="primary">
+      <mat-icon>cloud_upload</mat-icon>
+      <span>Choose a file…</span>
+    </button>
+  </div>
+  <ng-template #previewFile>
+    <button *ngIf="file" mat-icon-button color="warn" (click)="removeImage()">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <div class="image-background" [style.background-image]="'url(' + file + ')'">
+      <img [attr.src]="file" width="100%">
+    </div>
+  </ng-template>
+</div>

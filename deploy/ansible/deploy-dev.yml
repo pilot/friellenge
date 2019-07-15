@@ -1,0 +1,7 @@
+---
+  - name: Deploy project to dev server
+    hosts: dev
+    vars_files:
+      - host_vars/dev.yml
+    roles:
+      - build_front

@@ -1,0 +1,22 @@
+.comment-item {
+  .wrapper {
+    margin-left: 12px;
+  }
+  .user-avatar {
+    width: 42px;
+    height: 42px;
+    img {
+      width: 100%;
+    }
+  }
+  h4 {
+    margin: 0;
+  }
+  .comment-datetime {
+    color: #fc1e2e;
+  }
+  .comment-text {
+    color: #818181;
+    margin: 10px 0 20px;
+  }
+}

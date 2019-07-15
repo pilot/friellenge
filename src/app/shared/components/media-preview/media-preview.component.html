@@ -1,0 +1,33 @@
+<!--Video Player-->
+<ng-container *ngIf="data.video; else imageContent">
+  <div class="videoPlayer">
+    <video height="340" width="100%" controls controlslist="nodownload" playsinline preload="auto"
+           [src]="data.videoUrl" [poster]="data.previewUrl"></video>
+  </div>
+</ng-container>
+
+<!--Image Content: single or carousel-->
+<ng-template #imageContent>
+
+  <ng-container *ngIf="data.type == 'single'; else multiple">
+    <div class="preview preview-image" [ngStyle]="{'background-image': 'url('+data.previewUrl+')'}">
+      <img [src]="data.previewUrl">
+    </div>
+  </ng-container>
+
+  <ng-template #multiple>
+    <ngx-carousel [inputs]="carouselBanner">
+      <ngx-item NgxCarouselItem *ngFor="let tile of data.previewUrl;">
+        <div class="slider" [style.background-image]="'url(' + tile + ')'"></div>
+      </ngx-item>
+      <button NgxCarouselPrev class="leftRs">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+      <button NgxCarouselNext class="rightRs">
+        <mat-icon>arrow_forward_ios</mat-icon>
+      </button>
+    </ngx-carousel>
+  </ng-template>
+
+</ng-template>
+

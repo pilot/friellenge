@@ -1,0 +1,45 @@
+<mat-dialog-content>
+  <div class="wrapper">
+    <form [formGroup]="form" class="creature-form">
+      <!-- Input Name -->
+      <mat-form-field>
+        <input matInput placeholder="Заголовок" formControlName="name" required>
+        <mat-error *ngIf="form.get('name').hasError('required')">Поле обязательно для заполнения</mat-error>
+      </mat-form-field>
+      <!-- Input Text -->
+      <mat-form-field>
+        <input matInput placeholder="Text" formControlName="text" required>
+        <mat-error *ngIf="form.get('text').hasError('required')">Поле обязательно для заполнения</mat-error>
+      </mat-form-field>
+      <!-- Textarea Description -->
+      <mat-form-field>
+        <textarea matInput placeholder="Описание" formControlName="description" required></textarea>
+        <mat-error *ngIf="form.get('description').hasError('required')">Поле обязательно для заполнения</mat-error>
+      </mat-form-field>
+      <!-- Select Category -->
+      <mat-form-field>
+        <mat-select placeholder="Категория" formControlName="category" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let item of categories" [value]="item.uuid">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('category').hasError('required')">Пожалуйста, выберите категорию</mat-error>
+      </mat-form-field>
+      <!-- File Uploader -->
+      <div class="file-uploader">
+        <app-file-uploader (fileChange)="handleFile($event)"></app-file-uploader>
+      </div>
+      <div class="flex-row mat-buttons">
+        <button class="btn-submit" mat-raised-button color="primary" type="submit" (click)="onSubmit(form.value)"
+                [disabled]="!form.valid">Создать
+        </button>
+        <button mat-button mat-dialog-close>Cancel</button>
+      </div>
+    </form>
+  </div>
+</mat-dialog-content>
+
+
+
+

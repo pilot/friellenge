@@ -1,0 +1,17 @@
+<div class="countDown" [ngClass]="timerType">
+  <div class="inner" text-center>
+    <p *ngIf="timerType=='begin'">До начала Friellenge осталось:</p>
+    <p *ngIf="timerType=='end'">До конца Friellenge осталось:</p>
+    <!--Display Days-->
+    <ng-container *ngIf="days > 0">
+      <span>{{days | timer}} : </span>
+    </ng-container>
+    <!--Display Hours-->
+    <ng-container *ngIf="hours > 0">
+      <span>{{hours | timer}} :</span>
+    </ng-container>
+    <!--Display Minutes&Seconds-->
+    <span>{{minutes | timer}} :</span>
+    <span>{{seconds | timer}}</span>
+  </div>
+</div>

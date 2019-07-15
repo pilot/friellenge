@@ -1,0 +1,100 @@
+<div class="spinner-container" *ngIf="dataSource.loader">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="page-content">
+  <div class="header-page">
+    <h1 class="title">Friellenges</h1>
+  </div>
+
+  <mat-table [dataSource]="dataSource" matSort class="challenges-table">
+
+    <!-- Index Column -->
+    <ng-container matColumnDef="index">
+      <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+      <mat-cell *matCellDef="let row; let i = index;">
+        {{i+1}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Title Column -->
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <div class="flex-row title">
+          <ng-container *ngIf="row.preview?.type == 'single'; else multiple">
+            <div class="preview" [ngStyle]="{'background-image': 'url('+row.preview['previewUrl']+')'}">
+              <img [src]="row.preview['previewUrl']">
+            </div>
+          </ng-container>
+
+          <ng-template #multiple>
+            <div class="preview" [ngStyle]="{'background-image': 'url('+row.preview['previewUrl'][0]+')'}">
+              <img [src]="row.preview['previewUrl'][0]">
+            </div>
+          </ng-template>
+          <p class="sub-title">{{row.description | truncate: 3}}</p>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Author Column -->
+    <ng-container matColumnDef="author">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Author</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <div class="flex-row user">
+          <div class="user-photo" [ngStyle]="{'background-image': 'url('+row.author.photo+')'}" >
+          </div>
+          <p>{{row.author.fullName}}</p>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Type Category -->
+    <ng-container matColumnDef="category">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Сategory</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.category.name}}</mat-cell>
+    </ng-container>
+
+    <!-- Type Column -->
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Type</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{type[row.type]}}</mat-cell>
+    </ng-container>
+
+    <!-- Type begin_date -->
+    <ng-container matColumnDef="begin_date">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.begin_date}}</mat-cell>
+    </ng-container>
+
+    <!-- Type end_date -->
+    <ng-container matColumnDef="end_date">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>End Date</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.end_date}}</mat-cell>
+    </ng-container>
+
+    <!-- Menu actions Column -->
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-icon-button color="warn" (click)="blockedChallenge($event, row.uuid)">
+          <mat-icon>remove_circle</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteChallenge($event, row.uuid)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="goToDetail(row.uuid)">
+    </mat-row>
+  </mat-table>
+
+
+  <mat-paginator [length]="dataSource.pagination.count"
+                 [pageSize]="dataSource.pagination.pageSize">
+  </mat-paginator>
+</div>
+

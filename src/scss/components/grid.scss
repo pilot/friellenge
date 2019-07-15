@@ -1,0 +1,23 @@
+.row {
+  display: flex;
+}
+
+.col {
+  position: relative;
+  margin: 0;
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+}
+
+.col-7 {
+  flex: 0 0 58.33333%;
+  width: 58.33333%;
+  max-width: 58.33333%;
+}
+
+.col-5 {
+  flex: 0 0 41.66667%;
+  width: 41.66667%;
+  max-width: 41.66667%;
+}

@@ -1,0 +1,8 @@
+<div class="category-form">
+  <mat-form-field>
+    <input type="text" matInput placeholder="Enter Category name" [(ngModel)]="title">
+  </mat-form-field>
+  <button mat-mini-fab color="primary" [disabled]="title == ''" (click)=onSubmit()>
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

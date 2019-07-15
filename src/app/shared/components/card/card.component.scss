@@ -1,0 +1,51 @@
+.card__default {
+  margin-bottom: 40px;
+  .mat-card-content {
+    position: relative;
+    margin-bottom: 0;
+    cursor: pointer;
+  }
+  .user-panel {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .user-avatar {
+    img {
+      width: 36px;
+      height: 36px;
+    }
+  }
+  .user-name {
+    font-weight: bold;
+    margin: 0 12px;
+  }
+  .preview {
+    border-radius: 20px;
+    &.preview-image:after {
+      border-radius: 20px;
+    }
+  }
+  .main-info {
+    position: absolute;
+    bottom: 16px;
+    width: 100%;
+    z-index: 10;
+    color: #fff;
+    .inner {
+      padding: 16px;
+    }
+    h2 {
+      text-transform: capitalize;
+      word-wrap: normal;
+      margin: 5px 0;
+    }
+    .datetime {
+      text-align: right;
+      line-height: 2;
+      margin: 0;
+    }
+  }
+  .card__footer {
+    margin-top: 10px;
+  }
+}

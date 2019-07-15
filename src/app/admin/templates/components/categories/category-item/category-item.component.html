@@ -1,0 +1,18 @@
+<div class="item-category" [class.edit]="editing">
+  <div class="cell item">
+    <ng-container *ngIf="!editing; else editForm">{{item.name}}</ng-container>
+    <ng-template #editForm>
+      <mat-form-field>
+        <input type="text" matInput [(ngModel)]="title" (blur)="saveTitle()" (keyup.enter)="saveTitle()">
+      </mat-form-field>
+    </ng-template>
+  </div>
+  <div class="cell actions-icons">
+    <button class="edit-icon" mat-icon-button (click)="editTitle()">
+      <mat-icon>mode_edit</mat-icon>
+    </button>
+    <button mat-icon-button color="warn" (click)="remove.emit()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+<div class="spinner-container" *ngIf="dataSource.loading$ | async">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="page-content">
+  <div class="header-page">
+    <h1 class="title">Список Пользователей</h1>
+  </div>
+
+  <div class="header-table">
+    <mat-form-field>
+      <input matInput placeholder="Enter Name"
+             [(ngModel)]="filters.name"
+             (blur)="applyFilter('name')">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Select User Type" [(ngModel)]='filters.type'
+                  (ngModelChange)="applyFilter()">
+        <mat-option [value]="0">Частное лицо</mat-option>
+        <mat-option [value]="1">Компания</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-icon-button (click)="clearFilter()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <!-- Index Column -->
+    <ng-container matColumnDef="index">
+      <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+      <mat-cell *matCellDef="let row; let i = index;">
+        {{i+1}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- User Column -->
+    <ng-container matColumnDef="user">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Author</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <div class="flex-row user">
+          <div class="user-photo" [ngStyle]="{'background-image': 'url('+row.photo+')'}" >
+          </div>
+          <p class="sub-title">{{row.fullName}}</p>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <!-- User Type Column -->
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Cегментация</mat-header-cell>
+      <mat-cell *matCellDef="let row">Приватное лицо</mat-cell>
+    </ng-container>
+
+    <!-- Friellenges Column -->
+    <ng-container matColumnDef="friellenges">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Количество созданых Friellenges</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.challenges_count}}</mat-cell>
+    </ng-container>
+
+    <!-- Reports Column -->
+    <ng-container matColumnDef="reports">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Количество отчетов во Friellenges</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.reports_count}}</mat-cell>
+    </ng-container>
+
+    <!-- Menu actions Column -->
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-icon-button color="warn" (click)="blockedUser(row.uuid)">
+          <mat-icon>remove_circle</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+
+  <mat-paginator [length]="dataSource.pagination.count"
+                 [pageSize]="dataSource.pagination.pageSize">
+  </mat-paginator>
+</div>

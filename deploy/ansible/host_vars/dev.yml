@@ -1,0 +1,13 @@
+---
+# system options
+
+# linux username
+username: 'ubuntu'
+server_type: 'dev'
+git_branch: 'develop'
+git_url: 'ssh://git@bitbucket.org:j_kolotovkina/friellenge-web.git'
+user_homedir: "/home/{{ username }}"
+
+# project options
+project_slug: 'friellenge-web'
+project_front_dir: "{{ user_homedir }}/friellenge-dev-front/{{ project_slug }}"

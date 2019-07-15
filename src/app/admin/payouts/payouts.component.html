@@ -1,0 +1,67 @@
+<div class="spinner-container" *ngIf="dataSource.loader">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="page-content">
+  <div class="header-page">
+    <h1 class="title">Выплаты</h1>
+  </div>
+
+  <mat-table [dataSource]="dataSource" matSort class="payout-table">
+
+    <!-- Index Column -->
+    <ng-container matColumnDef="index">
+      <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+      <mat-cell *matCellDef="let row; let i = index;">
+        {{i+1}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Receiver Column -->
+    <ng-container matColumnDef="receiver">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Получатель</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <p class="sub-title">{{row.payout.receiver}}</p>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Amount Column -->
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Amount</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{row.amount}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- charged_amount Column -->
+    <ng-container matColumnDef="charged_amount">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Взимаемая сумма</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{row.payout.charged_amount}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Status Category -->
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.payout.status}}</mat-cell>
+    </ng-container>
+
+    <!-- Provider Column -->
+    <ng-container matColumnDef="provider">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Provider</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{row.provider}}
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="goToDetail(row.uuid)">
+    </mat-row>
+  </mat-table>
+
+
+  <mat-paginator [length]="dataSource.pagination.count"
+                 [pageSize]="dataSource.pagination.pageSize">
+  </mat-paginator>
+</div>

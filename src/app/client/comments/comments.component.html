@@ -1,0 +1,30 @@
+<app-header></app-header>
+
+<section #content class="main-content comments-page">
+  <ng-container *ngIf="commentsList.length > 0;">
+    <div class="list-comments"
+         infiniteScroll
+         [infiniteScrollDistance]="2"
+         [infiniteScrollThrottle]="50"
+         (scrolled)="onScroll()">
+
+      <div *ngFor="let comment of commentsList;" class="comment-item">
+            <div class="flex-row">
+              <div class="user-avatar">
+                <img src="{{comment.author.photo}}">
+              </div>
+              <div class="wrapper">
+                <h4>{{comment.author.fullName}}</h4>
+                <p class="comment-datetime">{{comment.created | dateTime}}</p>
+              </div>
+            </div>
+            <p class="comment-text">{{comment.text}}</p>
+      </div>
+
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!loadData && commentsList.length == 0;">
+    <p text-center>There are no comments yet.</p>
+  </ng-container>
+</section>

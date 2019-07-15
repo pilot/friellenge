@@ -1,0 +1,9 @@
+<mat-list>
+  <mat-list-item *ngFor="let item of categoriesList">
+    <app-category-item [item]="item"
+                       (remove)="removeCategory($event, item.uuid)"
+                       (update)="updateCategory($event, item.uuid)">
+    </app-category-item>
+  </mat-list-item>
+</mat-list>
+<app-category-form (create)="addCategory($event)"></app-category-form>

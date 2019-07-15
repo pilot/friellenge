@@ -1,0 +1,61 @@
+<mat-card class="card__default" *ngIf="card">
+  <div class="card__header">
+    <div class="flex-row-center user-panel">
+      <div class="user-avatar">
+        <img [src]="card.author.photo">
+      </div>
+      <p class="user-name">{{card.author.fullName}}</p>
+    </div>
+  </div>
+
+  <mat-card-content (click)="goToDetail(card.uuid)">
+
+    <ng-container *ngIf="card.preview?.type == 'single'; else multiple">
+      <div class="preview preview-image" [style.background-image]="'url('+card.preview?.previewUrl+')'">
+        <img [src]="card.preview?.previewUrl" alt="Friellenge Image">
+      </div>
+    </ng-container>
+
+    <ng-template #multiple>
+      <ngx-carousel [inputs]="carouselBanner">
+        <ngx-item NgxCarouselItem *ngFor="let tile of card.preview?.previewUrl;">
+          <div class="slider" [style.background-image]="'url(' + tile + ')'"></div>
+        </ngx-item>
+        <button NgxCarouselPrev class="leftRs">
+          <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        <button NgxCarouselNext class="rightRs">
+          <mat-icon>arrow_forward_ios</mat-icon>
+        </button>
+      </ngx-carousel>
+    </ng-template>
+
+    <div class="main-info">
+      <div class="inner">
+        <div class="row">
+          <div class="col col-7">
+            <h2>{{card.description | truncate: 3}}</h2>
+          </div>
+          <div class="col col-5">
+            <ng-container *ngIf="card.challenge_type == 'challenge' && card.startTimer(); else dateTime">
+              <p class="datetime">
+                <mat-icon>access_alarm</mat-icon>
+              </p>
+            </ng-container>
+            <ng-template #dateTime>
+              <p class="datetime">{{card.last_activity | dateTime}}</p>
+            </ng-template>
+          </div>
+        </div>
+        <p class="description"> {{card.description | truncate: 16}} </p>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <div class="card__footer">
+    <app-social-activity [data]="card.activities()"></app-social-activity>
+  </div>
+</mat-card>
+
+
+

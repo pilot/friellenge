@@ -1,0 +1,22 @@
+<div class="page-content page-settings">
+  <div class="header-page">
+    <h1 class="title">Admin Settings</h1>
+  </div>
+  <!-- Payments Configs Sections -->
+  <section class="section section-payments">
+    <div class="group-header">
+      <h4 class="subtitle">Payment configurations</h4>
+    </div>
+    <div class="content-inner">
+      <mat-form-field class="commission_percent">
+        <input matInput placeholder="Процент Комиссии" [formControl]="commissionPercent">
+      </mat-form-field>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-wrapper">
+      <button mat-raised-button color="primary" (click)="onSubmit()">Update</button>
+    </div>
+  </footer>
+</div>

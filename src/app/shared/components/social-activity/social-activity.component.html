@@ -1,0 +1,32 @@
+<div class="social-actions">
+  <div class="row">
+    <div class="col">
+      <button class="btn-not-link btn-like" (click)="isLiked()">
+        <div class="flex-row-center">
+          <span class="icon" [class.liked]="data.is_liked"></span>
+          <span>{{data.likes}}</span>
+        </div>
+      </button>
+      <ng-container *ngIf="data.type == 'challenge'">
+        <button class="btn-not-link btn-participant">
+          <div class="flex-row-center">
+            <span class="icon"></span>
+            <span>{{data.participants}}</span>
+          </div>
+        </button>
+      </ng-container>
+    </div>
+
+    <div class="col">
+      <button class="btn-comment" (click)="goToComments($event)">
+        <span>{{data.comments}} Comments</span>
+      </button>
+
+      <!--<div class="flex-row-center text-end">-->
+        <!--<button class="btn-comment" (click)="goToComments($event)">-->
+          <!--<span>{{data.comments}} Comments</span>-->
+        <!--</button>-->
+      <!--</div>-->
+    </div>
+  </div>
+</div>

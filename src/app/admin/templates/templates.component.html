@@ -1,0 +1,100 @@
+<div class="flex-row templates-page">
+  <div class="col col-left">
+    <mat-card>
+      <mat-card-content>
+        <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+          <mat-spinner></mat-spinner>
+        </div>
+        <div class="page-content">
+          <div class="header-page flex-row">
+            <h2 class="title">Шаблоны Friellenges</h2>
+            <button mat-raised-button color="primary" (click)="addTemplate()">Создать Шаблон</button>
+          </div>
+
+          <div class="header-table">
+            <mat-form-field>
+              <mat-select placeholder="Filter by category" [(ngModel)]='category' (ngModelChange)="applyFilter()">
+                <mat-option [value]="0">None</mat-option>
+                <mat-option *ngFor="let item of categories" [value]="item.name">{{item.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <mat-table [dataSource]="dataSource" matSort>
+
+            <!-- Index Column -->
+            <ng-container matColumnDef="index">
+              <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+              <mat-cell *matCellDef="let row; let i = index;">
+                {{i+1}}
+              </mat-cell>
+            </ng-container>
+
+            <!-- Preview Column -->
+            <ng-container matColumnDef="preview">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let row;">
+                <div class="preview" [ngStyle]="{'background-image': 'url('+row.imagePath()+')'}">
+                  <img [src]="row.imagePath()">
+                </div>
+              </mat-cell>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <p class="sub-title">{{row.name}}</p>
+              </mat-cell>
+            </ng-container>
+
+            <!-- Text Column -->
+            <ng-container matColumnDef="text">
+              <mat-header-cell *matHeaderCellDef>Text</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{row.text}}</mat-cell>
+            </ng-container>
+
+            <!-- Category Column -->
+            <ng-container matColumnDef="category">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Category</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{row.category.name}}</mat-cell>
+            </ng-container>
+
+            <!-- Menu actions Column -->
+            <ng-container matColumnDef="action">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <!--<button class="edit-icon" mat-icon-button>-->
+                <!--<mat-icon>create</mat-icon>-->
+                <!--</button>-->
+                <button mat-icon-button color="warn" (click)="deleteTemplate(row.uuid)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;">
+            </mat-row>
+          </mat-table>
+
+          <mat-paginator [length]="dataSource.pagination.count"
+                         [pageSize]="dataSource.pagination.pageSize">
+          </mat-paginator>
+
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="col col-right">
+    <mat-card>
+      <mat-card-content>
+        <!--<div class="header-page">-->
+          <!--<h2 class="title">Категории</h2>-->
+        <!--</div>-->
+        <h2 class="title">Категории</h2>
+        <app-categories></app-categories>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

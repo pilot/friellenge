@@ -1,0 +1,37 @@
+.wrap-left {
+  flex: 1 1 75%;
+  box-sizing: border-box;
+  max-width: 75%;
+  margin-right: 25px;
+}
+
+.wrap-right {
+  flex: 1 1 25%;
+  box-sizing: border-box;
+  max-width: 25%;
+  .mat-card {
+    margin-bottom: 20px;
+  }
+}
+
+.creature-form {
+  .mat-form-field {
+    display: block;
+  }
+}
+
+.flex-row.mat-buttons {
+  justify-content: space-between;
+  margin-top: 30px;
+  .btn-submit {
+    width: 140px;
+    max-height: 37px;
+  }
+}
+
+.mat-card-header {
+  margin-bottom: 20px;
+  .mat-card-header-text {
+    margin: 0;
+  }
+}

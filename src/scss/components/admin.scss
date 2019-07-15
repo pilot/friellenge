@@ -1,0 +1,148 @@
+@import './variables';
+.mat-drawer-content {
+  padding: 20px;
+}
+.mat-drawer-container.admin-panel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 40px;
+}
+
+.mat-sidenav.sidenav {
+  display: flex;
+  width: $sidebar-width;
+  background-color: $sidebar-bg;
+}
+
+.mat-toolbar.admin-toolbar {
+  height: $toolbar-height;
+  background-color: $sidebar-bg;
+  color: #fff;
+}
+
+.header-table {
+  color: #fff;
+  padding: 10px 20px;
+  background-color: $header-table-color;
+  .mat-checkbox-frame {
+    border-color: #fff;
+  }
+  .mat-input-element {
+    border-bottom: 1px solid #fff;
+    padding: 5px 0;
+  }
+  .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+  .mat-form-field-label {
+    color: #fff;
+  }
+  .mat-form-field-underline,
+  .mat-form-field-ripple {
+    background-color: transparent;
+  }
+  .mat-select-arrow,
+  .mat-select-value-text {
+    color: #fff;
+  }
+  .mat-select {
+    padding: 5px 0;
+  }
+  .mat-form-field-infix {
+    padding-top: 0;
+    border-top: 0;
+  }
+  .mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label,
+  .mat-form-field-can-float .mat-input-server:focus + .mat-form-field-label-wrapper .mat-form-field-label {
+    display: none;
+  }
+}
+
+.mat-table {
+  .user {
+    .user-photo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-size: cover;
+    }
+    p {
+      padding: 10px 10px;
+      margin: 0;
+    }
+  }
+  .flex-row.title {
+    align-items: center;
+    padding: 5px 0;
+    p {
+      padding: 0 10px;
+    }
+  }
+  .sub-title {
+    font-weight: bold;
+    padding: 0 10px;
+    color: $sub-title-color;
+  }
+  .mat-column-participant_count {
+    width: 100px;
+    max-width: 100px;
+
+  }
+}
+
+.mat-column-index {
+  max-width: 50px;
+}
+
+.mat-column-preview {
+  max-width: 110px;
+  padding: 5px 0;
+}
+
+.mat-cell {
+  .preview {
+    width: 90px;
+    min-width: 90px;
+    height: 80px;
+    display: block;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    img {
+      display: none;
+    }
+  }
+}
+
+.page-donations {
+  .header-page {
+    margin-bottom: 10px;
+  }
+}
+
+.statistic {
+  .subtitle {
+    font-size: 15px;
+    margin: 6px 0;
+  }
+  .subtitle.total-sum {
+    font-size: 19px;
+    font-weight: bold;
+    background-color: $header-table-color;
+    color: #fff;
+    display: inline-block;
+    padding: 8px 10px;
+    span {
+      color: #fff;
+      padding: 6px;
+    }
+  }
+  .subtitle span {
+    font-weight: bold;
+    margin-left: 10px;
+    color: $header-table-color;
+  }
+}
+

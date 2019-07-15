@@ -1,0 +1,20 @@
+.header-page {
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.col-left {
+  flex: 1 1 75%;
+  box-sizing: border-box;
+  max-width: 75%;
+  margin-right: 25px;
+}
+
+.col-right {
+  flex: 1 1 25%;
+  box-sizing: border-box;
+  max-width: 25%;
+  .mat-card {
+    margin-bottom: 20px;
+  }
+}
